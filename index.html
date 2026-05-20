@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Oil in Malaysia: Growth, Forests, and the Decoupling</title>
+  <meta name="description" content="A data visualisation exploring whether Malaysia's palm oil industry has decoupled production growth from deforestation." />
+  <meta name="author" content="Eghen Mardaymootoo" />
+
+  <!-- Pure.css used for layout grid and base typography reset -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+        integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+
+  <!-- Vega ,Vega-Lite, vega-embed via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- Project styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / TITLE============ -->
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">A data story</p>
+      <h1 class="page-title">Palm Oil in Malaysia</h1>
+      <p class="page-subtitle">Growth, forests, and the decoupling.</p>
+      <p class="byline">By Eghen Mardaymootoo &middot; Monash University Malaysia &middot; 2026</p>
+    </div>
+  </header>
+
+  <!-- ====== SECTION 1 : SET THE STAGE ================ -->
+  <section class="story-section" id="section-1">
+    <div class="container">
+
+      <h2 class="section-title">1. The world runs on it</h2>
+      <p class="section-lede">
+        Palm oil is in about half of all packaged consumer goods on a supermarket shelf.
+        Two countries grow almost all of it and Malaysia is one of them.
+      </p>
+
+      <!-- Chart 1: World choropleth -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-01" data-spec="specs/01_world_choropleth.json"></div>
+        <figcaption>
+          <strong>Figure 1.</strong> Crude palm oil production by country, 2023.
+          Indonesia and Malaysia together account for roughly 85% of global supply.
+          <span class="source">Source: FAO &middot; Our World in Data.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Chart 2: 50-year growth line -->
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <p class="section-text">
+            In 1970, Malaysia produced less than half a million tonnes of crude palm oil.
+            Today, it produces more than forty times that. The growth was not gradual &mdash;
+            it accelerated through three distinct policy eras.
+          </p>
+        </div>
+        <div class="pure-u-1 pure-u-md-2-3">
+          <figure class="chart-block">
+            <div class="vega-chart" id="chart-02" data-spec="specs/02_growth_line.json"></div>
+            <figcaption>
+              <strong>Figure 2.</strong> Annual Malaysian crude palm oil production, 1970&ndash;2024.
+              <span class="source">Source: MPOB &middot; FAO.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Chart 3: Comparative oil-crop yields -->
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <figure class="chart-block">
+            <div class="vega-chart" id="chart-03" data-spec="specs/03_oil_yields.json"></div>
+            <figcaption>
+              <strong>Figure 3.</strong> Oil yield per hectare by crop, global averages.
+              <span class="source">Source: FAO Crops and Livestock.</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <p class="section-text">
+            One reason the world cannot simply abandon palm oil: no other oil crop comes close
+            on yield. Replacing palm with soy or rapeseed would require many times more land
+            &mdash; and almost certainly, more cleared forest somewhere else.
+          </p>
+        </div>
+      </div>
+
+      <!-- Chart 4: Global end-uses waffle -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-04" data-spec="specs/04_end_uses_waffle.json"></div>
+        <figcaption>
+          <strong>Figure 4.</strong> What the world uses palm oil for. Each square represents 1% of global consumption.
+          <span class="source">Source: USDA &middot; Our World in Data.</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — WHERE IT LIVES
+  ============================================================ -->
+  <section class="story-section section-alt" id="section-2">
+    <div class="container">
+
+      <h2 class="section-title">2. Where palm oil lives in Malaysia</h2>
+      <p class="section-lede">
+        Roughly two-thirds of Malaysia's agricultural land is under oil palm. But the crop
+        is not spread evenly &mdash; and neither is the forest loss that followed it.
+      </p>
+
+      <!-- Charts 5 & 6: Side-by-side choropleths -->
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <figure class="chart-block">
+            <div class="vega-chart" id="chart-05" data-spec="specs/05_planted_area_map.json"></div>
+            <figcaption>
+              <strong>Figure 5.</strong> Oil palm planted area by state, 2024.
+              <span class="source">Source: MPOB.</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <figure class="chart-block">
+            <div class="vega-chart" id="chart-06" data-spec="specs/06_forest_loss_map.json"></div>
+            <figcaption>
+              <strong>Figure 6.</strong> Cumulative tree cover loss by state, 2001&ndash;2024.
+              <span class="source">Source: Global Forest Watch.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <p class="section-text section-text-center">
+        The two maps almost rhyme. The states with the most palm oil are the states that have
+        lost the most forest. But this is only the cumulative picture &mdash; it tells you nothing
+        about whether things are still getting worse, or whether something has changed.
+      </p>
+
+      <!-- Chart 7: Bivariate choropleth -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-07" data-spec="specs/07_bivariate_map.json"></div>
+        <figcaption>
+          <strong>Figure 7.</strong> A bivariate view: each state coloured by both its
+          palm oil intensity and its forest loss intensity. States in the darkest corner
+          carry both burdens at once.
+          <span class="source">Source: MPOB &middot; Global Forest Watch.</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — THE TWIST
+  ============================================================ -->
+  <section class="story-section" id="section-3">
+    <div class="container">
+
+      <h2 class="section-title">3. Something changed in 2016</h2>
+      <p class="section-lede">
+        For four decades, palm oil production and forest loss rose together. Then, around
+        2016, the two lines split.
+      </p>
+
+      <!-- Chart 8: Decoupling dual-axis line -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-08" data-spec="specs/08_decoupling_line.json"></div>
+        <figcaption>
+          <strong>Figure 8.</strong> National crude palm oil production (left axis) and
+          primary forest loss (right axis), 2001&ndash;2024. The shaded region marks the
+          period of decoupling.
+          <span class="source">Source: MPOB &middot; Global Forest Watch.</span>
+        </figcaption>
+      </figure>
+
+      <p class="section-text">
+        But the national average hides a more uneven story. Some states genuinely greened.
+        Others kept clearing. Find your state below.
+      </p>
+
+      <!-- Chart 9: Small multiples by state -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-09" data-spec="specs/09_state_small_multiples.json"></div>
+        <figcaption>
+          <strong>Figure 9.</strong> Each panel shows one state. Production (orange) and
+          forest loss (green) are indexed to 2001 = 100. Panel borders classify each
+          state's recent trajectory: greening, mixed, or still clearing.
+          <span class="source">Source: MPOB &middot; Global Forest Watch.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Chart 10: Quadrant scatter -->
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-2-3">
+          <figure class="chart-block">
+            <div class="vega-chart" id="chart-10" data-spec="specs/10_quadrant_scatter.json"></div>
+            <figcaption>
+              <strong>Figure 10.</strong> Growth in palm oil production vs change in forest
+              loss rate, 2014&ndash;2024, by state. The top-right quadrant is the worst place
+              to be; the bottom-right is where Malaysia wants every state to land.
+              <span class="source">Source: MPOB &middot; Global Forest Watch.</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <p class="section-text">
+            Sabah and Johor have done the hardest thing in the data: grown the industry
+            while cutting less forest. Kelantan and Pahang are still on the older trajectory.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — THE PRESSURE
+  ============================================================ -->
+  <section class="story-section section-alt" id="section-4">
+    <div class="container">
+
+      <h2 class="section-title">4. Who is pushing on the industry</h2>
+      <p class="section-lede">
+        Decoupling doesn't happen by accident. It happens because someone is pushing &mdash;
+        buyers, regulators, and the industry's own certification bodies.
+      </p>
+
+      <!-- Chart 11: Export flow map -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-11" data-spec="specs/11_export_flow_map.json"></div>
+        <figcaption>
+          <strong>Figure 11.</strong> Malaysian palm oil exports by destination, 2024.
+          Lines coloured red indicate countries whose deforestation regulations now affect
+          how palm oil can enter the market.
+          <span class="source">Source: MPOB.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Chart 12: Stacked area of product mix -->
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <p class="section-text">
+            Malaysia has been quietly moving up the value chain. Less raw crude palm oil
+            leaves the country today; more leaves as refined products, oleochemicals, and
+            biodiesel.
+          </p>
+        </div>
+        <div class="pure-u-1 pure-u-md-2-3">
+          <figure class="chart-block">
+            <div class="vega-chart" id="chart-12" data-spec="specs/12_product_mix_area.json"></div>
+            <figcaption>
+              <strong>Figure 12.</strong> Composition of palm oil exports by product
+              category, over time.
+              <span class="source">Source: MPOB.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Chart 13: Regulatory swim-lane timeline -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-13" data-spec="specs/13_regulatory_timeline.json"></div>
+        <figcaption>
+          <strong>Figure 13.</strong> Two decades of pressure: domestic policy, industry
+          certification, and buyer regulation. The sparkline below tracks primary forest
+          loss over the same period.
+          <span class="source">Sources: MPOB &middot; RSPO &middot; European Commission.</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — WHAT TO WATCH
+  ============================================================ -->
+  <section class="story-section" id="section-5">
+    <div class="container">
+
+      <h2 class="section-title">5. The story isn't over</h2>
+      <p class="section-lede">
+        The decoupling is real. It is also unfinished. Two states accounted for most of
+        Malaysia's primary forest loss in 2024.
+      </p>
+
+      <!-- Chart 14: Watch list ranked bar -->
+      <figure class="chart-block chart-full">
+        <div class="vega-chart" id="chart-14" data-spec="specs/14_watchlist_bar.json"></div>
+        <figcaption>
+          <strong>Figure 14.</strong> Primary forest loss by state, 2024.
+          <span class="source">Source: Global Forest Watch.</span>
+        </figcaption>
+      </figure>
+
+      <p class="section-text">
+        For the average Malaysian, palm oil is a bottle on a kitchen shelf. For the country,
+        it is a balance between an industry that feeds millions and a forest that cannot
+        regrow on demand. The decoupling shows the balance is not impossible. The states
+        still clearing show the work is not done.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="page-footer">
+    <div class="container">
+      <p>
+        <strong>Author:</strong> Eghen Mardaymootoo &middot; FIT2179 Data Visualisation 2 &middot; Monash University Malaysia, 2026.
+      </p>
+      <p>
+        <strong>Sources:</strong>
+        <br>Malaysian Palm Oil Board (MPOB) Overview Reports
+        <br>Global Forest Watch (Hansen/UMD tree cover loss data)
+        <br>FAO Crops and Livestock database
+        <br>Our World in Data
+        <br>USDA FAS.
+        <br>See <a href="docs/data_sources.md">data_sources.md</a> for full attribution.
+      </p>
+      <!--
+      <p>
+        <strong>AI use:</strong> Generative AI was used for grammar review, code suggestions,
+        and brainstorming. All visualisations, data wrangling, and narrative claims are the
+        author's own. See <a href="docs/ai_use.md">ai_use.md</a>.
+      </p>
+      -->
+      <p>
+        <strong>Repository:</strong>
+        <a href="https://github.com/EghenMardaymootoo/FIT2197-A2-PALM-OIL-IN-MALAYSIA.git">https://github.com/EghenMardaymootoo/FIT2197-A2-PALM-OIL-IN-MALAYSIA.git</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- lazy chart loading via IntersectionObserver in main.js -->
+  <script src="js/main.js"></script>
+</body>
+</html>
