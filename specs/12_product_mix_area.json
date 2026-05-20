@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Stacked area chart showing how Malaysia's palm oil export composition has shifted from raw crude palm oil toward refined products and oleochemicals.",
+  "title": {
+    "text": "Moving up the value chain",
+    "subtitle": "Composition of Malaysian palm oil exports, 2014\u20132024 (tonnes)",
+    "subtitleFontStyle": "italic",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a5a5a",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 380,
+  "padding": {"top": 10, "left": 10, "right": 30, "bottom": 10},
+  "background": "transparent",
+  "data": {
+    "url": "data/product_mix_by_year.csv"
+  },
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone",
+    "stroke": "white",
+    "strokeWidth": 0.6,
+    "opacity": 0.95
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "scale": {"domain": [2014, 2024], "nice": false},
+      "axis": {
+        "title": null,
+        "format": "d",
+        "labelFontSize": 11,
+        "tickCount": 6,
+        "grid": false,
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "exports_tonnes",
+      "type": "quantitative",
+      "aggregate": "sum",
+      "stack": "zero",
+      "axis": {
+        "title": "Exports (tonnes)",
+        "titleFontSize": 11,
+        "labelFontSize": 11,
+        "grid": true,
+        "gridColor": "#e8e2d4",
+        "domain": false,
+        "ticks": false,
+        "format": "~s"
+      }
+    },
+    "color": {
+      "field": "product",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Crude Palm Oil",
+          "RBD Palm Olein",
+          "RBD Palm Stearin",
+          "Palm Kernel Oil",
+          "Oleochemicals",
+          "Biodiesel",
+          "Other"
+        ],
+        "range": [
+          "#7c2d12",
+          "#c2410c",
+          "#ea580c",
+          "#fb923c",
+          "#14532d",
+          "#16a34a",
+          "#a8a29e"
+        ]
+      },
+      "legend": {
+        "title": "Product",
+        "titleFontSize": 11,
+        "labelFontSize": 11,
+        "orient": "right",
+        "symbolType": "square"
+      }
+    },
+    "order": {"field": "order", "type": "quantitative"},
+    "tooltip": [
+      {"field": "year", "type": "quantitative", "title": "Year"},
+      {"field": "product", "type": "nominal", "title": "Product"},
+      {"field": "exports_tonnes", "type": "quantitative", "title": "Exports (tonnes)", "format": ","}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "font": "Inter, system-ui, sans-serif"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth of oil palm planted area across Malaysian states. Data joined from CSV to TopoJSON via state name.",
+  "title": {
+    "text": "Where palm oil lives",
+    "subtitle": "Oil palm planted area by state, 2024 (hectares)",
+    "subtitleFontStyle": "italic",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a5a5a",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 420,
+  "padding": {"top": 10, "left": 10, "right": 10, "bottom": 10},
+  "background": "transparent",
+  "data": {
+    "url": "data/geo/malaysia_states.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "geoBoundaries-MYS-ADM1_simplified"
+    }
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [109.5, 4.0],
+    "scale": 1800
+  },
+  "transform": [
+    {
+      "lookup": "properties.shapeName",
+      "from": {
+        "data": {"url": "data/planted_area_by_state.csv"},
+        "key": "state",
+        "fields": ["planted_area_ha_2024"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#fbfaf7",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "color": {
+      "field": "planted_area_ha_2024",
+      "type": "quantitative",
+      "scale": {
+        "scheme": "oranges",
+        "domainMin": 0
+      },
+      "legend": {
+        "title": "Planted area (ha)",
+        "titleFontSize": 11,
+        "labelFontSize": 11,
+        "orient": "bottom-right",
+        "format": ",.0f",
+        "gradientLength": 180
+      }
+    },
+    "tooltip": [
+      {"field": "properties.shapeName", "type": "nominal", "title": "State"},
+      {"field": "planted_area_ha_2024", "type": "quantitative", "title": "Planted area (ha)", "format": ","}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "font": "Inter, system-ui, sans-serif"
+  }
+}

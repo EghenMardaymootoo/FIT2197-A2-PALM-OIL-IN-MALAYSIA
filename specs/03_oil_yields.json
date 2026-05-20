@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Horizontal bar chart comparing oil yield per hectare across major oil crops. Highlights why oil palm dominates global supply despite using less land.",
+  "title": {
+    "text": "No other crop comes close",
+    "subtitle": "Oil yield per hectare, tonnes \u00b7 global averages",
+    "subtitleFontStyle": "italic",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a5a5a",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 280,
+  "padding": {"top": 10, "left": 10, "right": 60, "bottom": 10},
+  "background": "transparent",
+  "data": {
+    "url": "data/oil_yields_by_crop.csv"
+  },
+  "layer": [
+    {
+      "description": "The bars themselves",
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2,
+        "height": {"band": 0.7}
+      },
+      "encoding": {
+        "y": {
+          "field": "crop",
+          "type": "nominal",
+          "sort": "-x",
+          "axis": {
+            "title": null,
+            "labelFontSize": 12,
+            "domain": false,
+            "ticks": false,
+            "labelPadding": 6
+          }
+        },
+        "x": {
+          "field": "oil_yield_tonnes_per_hectare",
+          "type": "quantitative",
+          "axis": {
+            "title": "Tonnes of oil per hectare per year",
+            "titleFontSize": 11,
+            "labelFontSize": 11,
+            "grid": true,
+            "gridColor": "#e8e2d4",
+            "domain": false,
+            "ticks": false
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.crop === 'Oil palm'",
+            "value": "#c2410c"
+          },
+          "value": "#d6cfc1"
+        },
+        "tooltip": [
+          {"field": "crop", "type": "nominal", "title": "Crop"},
+          {"field": "oil_yield_tonnes_per_hectare", "type": "quantitative", "title": "Tonnes/hectare", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "description": "Value labels at the end of each bar",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "fontSize": 11,
+        "color": "#1a1a1a"
+      },
+      "encoding": {
+        "y": {"field": "crop", "type": "nominal", "sort": "-x"},
+        "x": {"field": "oil_yield_tonnes_per_hectare", "type": "quantitative"},
+        "text": {
+          "field": "oil_yield_tonnes_per_hectare",
+          "type": "quantitative",
+          "format": ".2f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Inter, system-ui, sans-serif"
+  }
+}

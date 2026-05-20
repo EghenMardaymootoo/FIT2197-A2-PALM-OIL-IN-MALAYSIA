@@ -1,0 +1,117 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Ranked horizontal bar chart of primary forest loss by Malaysian state in 2024. The top two states are highlighted to identify where deforestation pressure remains.",
+  "title": {
+    "text": "The story isn't over",
+    "subtitle": "Primary forest loss by state, 2024 (hectares)",
+    "subtitleFontStyle": "italic",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a5a5a",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 360,
+  "padding": {"top": 10, "left": 10, "right": 80, "bottom": 10},
+  "background": "transparent",
+  "data": {
+    "url": "data/forest_loss_by_state_2024.csv"
+  },
+  "transform": [
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "primary_forest_loss_ha_2024", "order": "descending"}]
+    },
+    {
+      "calculate": "datum.rank <= 2 ? 'Still clearing' : 'Lower loss'",
+      "as": "category"
+    }
+  ],
+  "layer": [
+    {
+      "description": "The bars",
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2,
+        "height": {"band": 0.75}
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "primary_forest_loss_ha_2024",
+            "op": "max",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelFontSize": 12,
+            "domain": false,
+            "ticks": false,
+            "labelPadding": 6
+          }
+        },
+        "x": {
+          "field": "primary_forest_loss_ha_2024",
+          "type": "quantitative",
+          "axis": {
+            "title": "Hectares of primary forest lost in 2024",
+            "titleFontSize": 11,
+            "labelFontSize": 11,
+            "grid": true,
+            "gridColor": "#e8e2d4",
+            "domain": false,
+            "ticks": false,
+            "format": ","
+          }
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Still clearing", "Lower loss"],
+            "range": ["#c2410c", "#d6cfc1"]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "labelFontSize": 11,
+            "offset": 10,
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "primary_forest_loss_ha_2024", "type": "quantitative", "title": "Forest loss (ha)", "format": ","},
+          {"field": "rank", "type": "ordinal", "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "description": "Value labels at the end of each bar",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "fontSize": 11,
+        "color": "#1a1a1a"
+      },
+      "encoding": {
+        "y": {"field": "state", "type": "nominal", "sort": {"field": "primary_forest_loss_ha_2024", "op": "max", "order": "descending"}},
+        "x": {"field": "primary_forest_loss_ha_2024", "type": "quantitative"},
+        "text": {
+          "field": "primary_forest_loss_ha_2024",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Inter, system-ui, sans-serif"
+  }
+}

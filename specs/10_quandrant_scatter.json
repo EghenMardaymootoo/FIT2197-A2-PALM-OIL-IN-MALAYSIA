@@ -1,0 +1,151 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Scatterplot of palm oil production growth versus change in forest loss rate by Malaysian state, 2014-2024. Quadrants classify each state's joint trajectory.",
+  "title": {
+    "text": "Greening or still clearing?",
+    "subtitle": "State-level palm oil growth vs change in forest loss, 2014\u20132024",
+    "subtitleFontStyle": "italic",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a5a5a",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 440,
+  "padding": {"top": 10, "left": 10, "right": 40, "bottom": 10},
+  "background": "transparent",
+  "layer": [
+    {
+      "description": "Background quadrant shading \u2014 lower-right (green) for decoupling success",
+      "data": {
+        "values": [
+          {"x_min": 0,   "x_max": 25,  "y_min": -60, "y_max": 0,   "label": "good"},
+          {"x_min": 0,   "x_max": 25,  "y_min": 0,   "y_max": 30,  "label": "bad"}
+        ]
+      },
+      "mark": {"type": "rect", "opacity": 0.07},
+      "encoding": {
+        "x":  {"field": "x_min",  "type": "quantitative"},
+        "y":  {"field": "y_min",  "type": "quantitative"},
+        "color": {
+          "field": "label",
+          "type": "nominal",
+          "scale": {"domain": ["good", "bad"], "range": ["#14532d", "#c2410c"]},
+          "legend": null
+        }
+      }
+    },
+    {
+      "description": "Zero-axis reference line",
+      "data": {"values": [{"y": 0}]},
+      "mark": {"type": "rule", "color": "#9a9285", "strokeDash": [3, 3], "strokeWidth": 1},
+      "encoding": {"y": {"field": "y", "type": "quantitative"}}
+    },
+    {
+      "description": "Quadrant labels",
+      "data": {
+        "values": [
+          {"x": 22, "y": -55, "label": "Greening", "subtle": "growth + less forest loss"},
+          {"x": 22, "y": 25,  "label": "Still clearing", "subtle": "growth + more forest loss"}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#5a5a5a"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "description": "The state points",
+      "data": {"url": "data/state_decoupling_2014_2024.csv"},
+      "transform": [
+        {
+          "calculate": "datum.forest_loss_change_pct <= 0 ? 'Greening' : 'Still clearing'",
+          "as": "category"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 200,
+        "opacity": 0.85,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "production_growth_pct",
+          "type": "quantitative",
+          "scale": {"domain": [0, 25]},
+          "axis": {
+            "title": "Production growth, 2014\u20132024 (%)",
+            "titleFontSize": 11,
+            "labelFontSize": 11,
+            "grid": true,
+            "gridColor": "#e8e2d4",
+            "domain": false,
+            "ticks": false,
+            "format": "d"
+          }
+        },
+        "y": {
+          "field": "forest_loss_change_pct",
+          "type": "quantitative",
+          "scale": {"domain": [-60, 30]},
+          "axis": {
+            "title": "Change in forest loss rate (%)",
+            "titleFontSize": 11,
+            "labelFontSize": 11,
+            "grid": true,
+            "gridColor": "#e8e2d4",
+            "domain": false,
+            "ticks": false,
+            "format": "d"
+          }
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Greening", "Still clearing"],
+            "range": ["#14532d", "#c2410c"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "production_growth_pct", "type": "quantitative", "title": "Production growth (%)", "format": ".0f"},
+          {"field": "forest_loss_change_pct", "type": "quantitative", "title": "Forest loss change (%)", "format": ".0f"}
+        ]
+      }
+    },
+    {
+      "description": "State name labels next to each point",
+      "data": {"url": "data/state_decoupling_2014_2024.csv"},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "fontSize": 10,
+        "color": "#1a1a1a"
+      },
+      "encoding": {
+        "x": {"field": "production_growth_pct", "type": "quantitative"},
+        "y": {"field": "forest_loss_change_pct", "type": "quantitative"},
+        "text": {"field": "state"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Inter, system-ui, sans-serif"
+  }
+}
