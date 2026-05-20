@@ -1,0 +1,169 @@
+/* --- Fonts (via Google Fonts; swap or remove if you prefer system fonts) --- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap");
+
+/* --- Design tokens --- */
+:root {
+  --color-bg: #fbfaf7;
+  --color-bg-alt: #f3efe7;
+  --color-ink: #1a1a1a;
+  --color-muted: #5a5a5a;
+  --color-accent: #c2410c;   /* burnt orange — palm */
+  --color-forest: #14532d;   /* deep green — forest */
+  --color-rule: #d6cfc1;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+
+  --maxw: 1100px;
+  --pad: 1.5rem;
+}
+
+/* --- Reset bits not covered by Pure.css --- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Container --- */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* --- Header --- */
+.page-header {
+  padding: 5rem 0 4rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem;
+}
+.page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+.page-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--color-muted);
+  margin: 0 0 1.5rem;
+}
+.byline {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* --- Sections --- */
+.story-section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+.section-alt { background: var(--color-bg-alt); }
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+.section-lede {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-muted);
+  max-width: 38em;
+  margin: 0 0 3rem;
+}
+.section-text {
+  font-size: 1rem;
+  max-width: 32em;
+  padding: 1rem;
+}
+.section-text-center {
+  margin: 2rem auto;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+/* --- Chart blocks --- */
+.chart-block {
+  margin: 1.5rem 0 2.5rem;
+  padding: 0;
+}
+.chart-full {
+  margin-left: auto;
+  margin-right: auto;
+}
+.vega-chart {
+  width: 100%;
+  min-height: 320px;             /* reserves space so layout doesn't jump on load */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vega-chart.is-loading::before {
+  content: "Loading chart…";
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+.chart-error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+  max-width: 50em;
+}
+figcaption strong {
+  color: var(--color-ink);
+}
+.source {
+  display: inline-block;
+  margin-left: 0.5em;
+  font-style: italic;
+}
+
+/* --- Footer --- */
+.page-footer {
+  background: #1a1a1a;
+  color: #d6cfc1;
+  padding: 3rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.page-footer p { margin: 0 0 0.75rem; }
+.page-footer a {
+  color: #fbb78a;
+  text-decoration: underline;
+}
+
+/* --- Pure.css grid tweaks: add a touch of gutter on md+ --- */
+@media screen and (min-width: 48em) {
+  .pure-g > [class*="pure-u-"] {
+    padding: 0 0.75rem;
+  }
+}
