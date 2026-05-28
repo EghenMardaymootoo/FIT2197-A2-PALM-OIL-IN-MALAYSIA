@@ -1,0 +1,49 @@
+country,iso3,id,production_tonnes
+Indonesia,IDN,360,47084300
+Malaysia,MYS,458,18551950
+Thailand,THA,764,3323200
+Colombia,COL,170,1841880
+Nigeria,NGA,566,1460000
+Guatemala,GTM,320,933926
+Papua New Guinea,PNG,598,770000
+Honduras,HND,340,655000
+Brazil,BRA,076,637353
+Cote d'Ivoire,CIV,384,562465
+Ecuador,ECU,218,494674
+Mexico,MEX,484,386700
+Cameroon,CMR,120,320000
+Democratic Republic of Congo,COD,180,300000
+Ghana,GHA,288,300000
+Peru,PER,604,300000
+Costa Rica,CRI,188,280463
+Nicaragua,NIC,558,148622
+Gabon,GAB,266,146800
+Philippines,PHL,608,135200
+China,CHN,156,112877
+Venezuela,VEN,862,103346
+Benin,BEN,204,100000
+Cambodia,KHM,116,100000
+Sierra Leone,SLE,694,85800
+Panama,PAN,591,74000
+Angola,AGO,024,64000
+Guinea,GIN,324,50000
+Dominican Republic,DOM,214,48000
+Liberia,LBR,430,45000
+Solomon Islands,SLB,090,31000
+Congo,COG,178,27616
+Togo,TGO,768,21000
+Burundi,BDI,108,16977
+Senegal,SEN,686,14000
+Jamaica,JAM,388,6500
+Guinea-Bissau,GNB,624,5948
+Tanzania,TZA,834,5615
+Equatorial Guinea,GNQ,226,5300
+Sao Tome and Principe,STP,678,4870
+Gambia,GMB,270,4161
+Madagascar,MDG,450,4076
+Paraguay,PRY,600,3810
+Central African Republic,CAF,140,629
+Suriname,SUR,740,136
+Brunei,BRN,096,0
+Japan,JPN,392,0
+Ukraine,UKR,804,0
